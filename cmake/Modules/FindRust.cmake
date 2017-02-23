@@ -1,13 +1,19 @@
 
 if(WIN32)
-	set(USER_HOME "$ENV{HOMEDRIVE}$ENV{HOMEPATH}")
+	set(USER_HOME "$ENV{USERPROFILE}")
 else()
 	set(USER_HOME "$ENV{HOME}")
 endif()
 
 # Find cargo prefix
-find_path(CARGO_PREFIX "bin"
-	PATHS "${USER_HOME}/.cargo")
+find_path(CARGO_PREFIX ".cargo"
+	PATHS "${USER_HOME}")
+
+if(CARGO_PREFIX MATCHES "NOTFOUND")
+	message(FATAL_ERROR "Could not find Rust!")
+else()
+	set(CARGO_PREFIX "${CARGO_PREFIX}/.cargo")
+endif()
 
 # Find cargo executable
 find_program(CARGO_EXECUTABLE cargo
