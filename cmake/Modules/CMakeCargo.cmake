@@ -37,10 +37,13 @@ function(cargo_build)
         list(APPEND CARGO_ARGS "--release")
     endif()    
     
+    file(GLOB_RECURSE LIB_SOURCES "*.rs")
+
     add_custom_command(
         OUTPUT "${CMAKE_CURRENT_SOURCE_DIR}/${LIB_FILE}"
         COMMAND cargo ARGS ${CARGO_ARGS}
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+        DEPENDS ${LIB_SOURCES}
         COMMENT "running cargo")
     add_custom_target(${CARGO_NAME}_target ALL DEPENDS ${LIB_FILE})
     add_library(${CARGO_NAME} STATIC IMPORTED GLOBAL)
