@@ -40,11 +40,7 @@ function(cargo_build)
         set(LIB_BUILD_TYPE "debug")
     endif()
 
-    if(WIN32)
-        set(LIB_FILE "${CARGO_TARGET_DIR}/${LIB_TARGET}/${LIB_BUILD_TYPE}/${LIB_NAME}.lib")
-    else()
-        set(LIB_FILE "${CARGO_TARGET_DIR}/${LIB_TARGET}/${LIB_BUILD_TYPE}/lib${LIB_NAME}.a")
-    endif()
+    set(LIB_FILE "${CARGO_TARGET_DIR}/${LIB_TARGET}/${LIB_BUILD_TYPE}/${CMAKE_STATIC_LIBRARY_PREFIX}${LIB_NAME}${CMAKE_STATIC_LIBRARY_SUFFIX}")
 
 	if(IOS)
 		set(CARGO_ARGS "lipo")
