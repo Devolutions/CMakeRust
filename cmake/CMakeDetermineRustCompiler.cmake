@@ -18,7 +18,7 @@ if(CMAKE_Rust_COMPILER)
 	set(CMAKE_Rust_COMPILER_LOADED 1)
 endif(CMAKE_Rust_COMPILER)
 
-configure_file(${CMAKE_SOURCE_DIR}/cmake/Modules/CMakeRustCompiler.cmake.in
+configure_file(${CMAKE_SOURCE_DIR}/cmake/CMakeRustCompiler.cmake.in
 	${CMAKE_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/${CMAKE_VERSION}/CMakeRustCompiler.cmake IMMEDIATE @ONLY)
 
 set(CMAKE_Rust_COMPILER_ENV_VAR "RUSTC")
