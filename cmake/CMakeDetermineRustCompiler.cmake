@@ -9,7 +9,7 @@ if(NOT CMAKE_Rust_COMPILER)
 	endif()
 endif()
 
-message(STATUS "Cargo Prefix: ${CARGO_PREFIX}")
+message(STATUS "Cargo Home: ${CARGO_HOME}")
 message(STATUS "Rust Compiler Version: ${RUSTC_VERSION}")
 
 mark_as_advanced(CMAKE_Rust_COMPILER)
