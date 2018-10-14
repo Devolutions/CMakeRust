@@ -4,15 +4,19 @@ set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM BOTH)
 set(_CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ${CMAKE_FIND_ROOT_PATH_MODE_INCLUDE})
 set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE BOTH)
 
-if(WIN32)
-	set(USER_HOME "$ENV{USERPROFILE}")
-else()
-	set(USER_HOME "$ENV{HOME}")
-endif()
+if ("$ENV{CARGO_HOME}" STREQUAL "")
+	if(WIN32)
+		set(USER_HOME "$ENV{USERPROFILE}")
+	else()
+		set(USER_HOME "$ENV{HOME}")
+	endif()
 
-# Find cargo prefix
-find_path(CARGO_PREFIX ".cargo"
-	PATHS "${USER_HOME}")
+	# Find cargo prefix
+	find_path(CARGO_PREFIX ".cargo"
+		PATHS "${USER_HOME}")
+else()
+	set(CARGO_PREFIX "$ENV{CARGO_HOME}")
+endif()
 
 if(CARGO_PREFIX MATCHES "NOTFOUND")
 	message(FATAL_ERROR "Could not find Rust!")
